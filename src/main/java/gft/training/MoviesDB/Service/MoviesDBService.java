@@ -9,9 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class MoviesDBService {
 	
-	WebClient webClient;// = WebClient.create("https://api.themoviedb.org/3/");
+	WebClient webClient;
 
 	String baseUrl;
+
+	public MoviesDBService() {
+		this.baseUrl = "https://api.themoviedb.org/3/";
+		webClient = WebClient.create(baseUrl);
+	}
 	public MoviesDBService(String baseUrl) {
 		this.baseUrl = baseUrl;
 		webClient = WebClient.create(baseUrl);

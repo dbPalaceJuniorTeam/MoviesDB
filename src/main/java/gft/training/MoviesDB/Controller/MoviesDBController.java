@@ -61,8 +61,17 @@ public class MoviesDBController {
 	
 	@GetMapping("/movie/{id}")
 	public HashMap<String, Object> findMovieById(@PathVariable Integer id, @AuthenticationPrincipal UserDetails user) {
-		
-		return moviesDBService.findMovieById(id);
+		String movieid = Integer.toString(id);
+		UserMovie userMovie = userMovieReporitory.findByUsernameAndMovie(user.getUsername(), movieid).orElse(null);
+
+		HashMap<String, Object> movie = moviesDBService.findMovieById(id);
+		if (userMovie != null) {
+			movie.put("favorite", userMovie.getFavorite());
+			movie.put("personal_rating", userMovie.getPersonal_rating());
+			movie.put("notes", userMovie.getNotes());
+		}
+		return movie;
+
 		
 	}
 	
