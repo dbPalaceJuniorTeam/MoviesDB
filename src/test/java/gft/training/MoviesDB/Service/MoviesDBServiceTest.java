@@ -28,6 +28,7 @@ class MoviesDBServiceTest {
     public MockWebServer mockBackEnd;
 
     JSONResponses jsonResponses;
+    HashMap<String, Object> expectedResponse;
 
 
 
@@ -46,14 +47,16 @@ class MoviesDBServiceTest {
 
         moviesDBService = new MoviesDBService(mockBackEnd.url("/").url().toString());
 
+        expectedResponse = new HashMap<>();
+        expectedResponse.put("images", 0);
+        expectedResponse.put("change_keys", 0);
+
     }
 
     @Test
     void getConfig() throws IOException, InterruptedException {
         //Given
-        HashMap<String, Object> expectedResponse = new HashMap<>();
-        expectedResponse.put("images", 0);
-        expectedResponse.put("change_keys", 0);
+
         mockBackEnd.enqueue(new MockResponse()
                 .addHeader("Content-Type", "application/json")
                 .setBody(objectMapper.writeValueAsString(expectedResponse))
@@ -67,38 +70,143 @@ class MoviesDBServiceTest {
     }
 
     @Test
-    void findAllGenres() {
+    void findAllGenres() throws JsonProcessingException {
+        //Given
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findAllGenres();
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findAllPopularMovies() {
+    void findAllPopularMovies() throws JsonProcessingException {
+        //Given
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findAllPopularMovies();
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findTopRatedMovies() {
+    void findTopRatedMovies() throws JsonProcessingException {
+        //Given
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findTopRatedMovies();
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findMovieById() {
+    void findMovieById() throws JsonProcessingException {
+        //Given
+        Integer id = 420;
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findMovieById(id);
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findCreditsById() {
+    void findCreditsById() throws JsonProcessingException {
+        //Given
+        Integer id = 420;
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findCreditsById(id);
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findImagesById() {
+    void findImagesById() throws JsonProcessingException {
+        //Given
+        Integer id = 420;
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findCreditsById(id);
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findKeywordsById() {
+    void findKeywordsById() throws JsonProcessingException {
+        //Given
+        Integer id = 420;
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findKeywordsById(id);
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findRecommendationsById() {
+    void findRecommendationsById() throws JsonProcessingException {
+        //Given
+        Integer id = 420;
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findRecommendationsById(id);
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 
     @Test
-    void findSimilarMoviesById() {
+    void findSimilarMoviesById() throws JsonProcessingException {
+        //Given
+        Integer id = 420;
+        mockBackEnd.enqueue(new MockResponse()
+                .addHeader("Content-Type", "application/json")
+                .setBody(objectMapper.writeValueAsString(expectedResponse))
+        );
+
+        //When
+        HashMap<String, Object> actual = moviesDBService.findSimilarMoviesById(id);
+
+        //Then
+        assertEquals(expectedResponse.toString(),actual.toString());
     }
 }
