@@ -156,7 +156,7 @@ class MoviesDBServiceTest {
         );
 
         //When
-        HashMap<String, Object> actual = moviesDBService.findCreditsById(id);
+        HashMap<String, Object> actual = moviesDBService.findImagesById(id);
 
         //Then
         assertEquals(expectedResponse.toString(),actual.toString());

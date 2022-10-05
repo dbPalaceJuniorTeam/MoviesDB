@@ -98,6 +98,4 @@ public class MoviesDBService {
 				.bodyToMono(HashMap.class).block();
 		
 	}
-	
-	
 }
