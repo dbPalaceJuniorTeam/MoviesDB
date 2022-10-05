@@ -9,15 +9,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class MoviesDBService {
 	
-	WebClient webClient = WebClient.create("https://api.themoviedb.org/3/");
+	WebClient webClient;// = WebClient.create("https://api.themoviedb.org/3/");
 
-	@Value("${themoviedatabase.api_key}")
-    private String api_key;
+	String baseUrl;
+	public MoviesDBService(String baseUrl) {
+		this.baseUrl = baseUrl;
+		webClient = WebClient.create(baseUrl);
+	}
+
+	private String api_key="2b868b906423d3e47dcc13efbc5a14e1";
+
 
 	public HashMap<String, Object> getConfig() {
-		
-		return new HashMap();
-		
+		System.out.println(api_key);
+		return webClient.get()
+				.uri(uriBuilder -> uriBuilder.path("configuration").queryParam("api_key", api_key).build()).retrieve()
+				.bodyToMono(HashMap.class).block();
 	}
 	
 	public HashMap<String, Object> findAllGenres() {
