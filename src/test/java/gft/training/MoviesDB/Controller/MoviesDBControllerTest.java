@@ -1,22 +1,18 @@
-package gft.training.MoviesDB.ControllerTest;
+package gft.training.MoviesDB.Controller;
 
-import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.WithMockUser;
 
-import java.security.Principal;
 import java.util.*;
 
-import gft.training.MoviesDB.Controller.MoviesDBController;
 import gft.training.MoviesDB.Entity.UserMovie;
 import gft.training.MoviesDB.Repository.UserMovieRepository;
 import gft.training.MoviesDB.Service.MoviesDBService;
@@ -376,7 +372,6 @@ public class MoviesDBControllerTest {
 		// GIVEN
 		Integer id = 420;
 		UserMovie bodyRequest = new UserMovie();
-		UserMovie usermovie = null;
 		bodyRequest.setMovie(id.toString());
 		UserDetails user = new UserDetails() {
 			
@@ -424,13 +419,14 @@ public class MoviesDBControllerTest {
 		};
 		
 		ResponseEntity<UserMovie> response = new ResponseEntity<UserMovie>(bodyRequest, HttpStatus.OK);
-		
+
+
 		// WHEN
-		given(userMovieRepository.findByUsernameAndMovie(user.getUsername(), id.toString())).willReturn(Optional.ofNullable(usermovie));
+		given(userMovieRepository.findByUsernameAndMovie(user.getUsername(), id.toString())).willReturn(Optional.empty());
 		given(userMovieRepository.save(bodyRequest)).willAnswer((invocation) -> invocation.getArgument(0));
 		
 		// THEN
-		assertEquals(response, moviesDBController.patchUserMovie(id, bodyRequest, user));
+		assertEquals(response.toString(), moviesDBController.patchUserMovie(id, bodyRequest, user).toString());
 	}
 
 }
