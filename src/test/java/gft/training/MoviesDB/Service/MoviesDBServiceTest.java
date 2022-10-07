@@ -8,6 +8,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.*;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import reactor.test.StepVerifier;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
 class MoviesDBServiceTest {
 
     MoviesDBService moviesDBService;
@@ -29,6 +30,7 @@ class MoviesDBServiceTest {
 
     JSONResponses jsonResponses;
     HashMap<String, Object> expectedResponse;
+
 
 
 
@@ -56,7 +58,6 @@ class MoviesDBServiceTest {
     @Test
     void getConfig() throws IOException, InterruptedException {
         //Given
-
         mockBackEnd.enqueue(new MockResponse()
                 .addHeader("Content-Type", "application/json")
                 .setBody(objectMapper.writeValueAsString(expectedResponse))

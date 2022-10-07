@@ -26,7 +26,7 @@ public class MoviesDBService {
 
 
 	public HashMap<String, Object> getConfig() {
-		System.out.println(api_key);
+
 		return webClient.get()
 				.uri(uriBuilder -> uriBuilder.path("configuration").queryParam("api_key", api_key).build()).retrieve()
 				.bodyToMono(HashMap.class).block();

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -212,6 +213,7 @@ public class MovieDBControllerIT {
         Principal user = () -> "admin";
 
         UserMovie userMovie = new UserMovie();
+
 
         given(repository.findByUsernameAndMovie(user.getName(),id.toString())).willReturn(Optional.of(userMovie));
 
