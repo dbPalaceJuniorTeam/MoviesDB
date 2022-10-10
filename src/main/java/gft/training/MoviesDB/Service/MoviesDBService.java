@@ -67,7 +67,7 @@ public class MoviesDBService {
 	public HashMap<String, Object> findCreditsById(Integer id) {
 		
 		return webClient.get()
-				.uri(uriBuilder -> uriBuilder.path("/api/movie/"+id+"/credits").queryParam("api_key", api_key).build()).retrieve()
+				.uri(uriBuilder -> uriBuilder.path("/movie/"+id+"/credits").queryParam("api_key", api_key).build()).retrieve()
 				.bodyToMono(HashMap.class).block();
 		
 	}
@@ -75,7 +75,7 @@ public class MoviesDBService {
 	public HashMap<String, Object> findImagesById(Integer id) {
 		
 		return webClient.get()
-				.uri(uriBuilder -> uriBuilder.path("/api/movie/"+id+"/images").queryParam("api_key", api_key).build()).retrieve()
+				.uri(uriBuilder -> uriBuilder.path("/movie/"+id+"/images").queryParam("api_key", api_key).build()).retrieve()
 				.bodyToMono(HashMap.class).block();
 		
 	}
@@ -83,7 +83,7 @@ public class MoviesDBService {
 	public HashMap<String, Object> findKeywordsById(Integer id) {
 		
 		return webClient.get()
-				.uri(uriBuilder -> uriBuilder.path("/api/movie/"+id+"/keywords").queryParam("api_key", api_key).build()).retrieve()
+				.uri(uriBuilder -> uriBuilder.path("/movie/"+id+"/keywords").queryParam("api_key", api_key).build()).retrieve()
 				.bodyToMono(HashMap.class).block();
 		
 	}
@@ -91,7 +91,7 @@ public class MoviesDBService {
 	public HashMap<String, Object> findRecommendationsById(Integer id) {
 		
 		return webClient.get()
-				.uri(uriBuilder -> uriBuilder.path("/api/movie/"+id+"/recommendations").queryParam("api_key", api_key).build()).retrieve()
+				.uri(uriBuilder -> uriBuilder.path("/movie/"+id+"/recommendations").queryParam("api_key", api_key).build()).retrieve()
 				.bodyToMono(HashMap.class).block();
 		
 	}
@@ -99,7 +99,7 @@ public class MoviesDBService {
 	public HashMap<String, Object> findSimilarMoviesById(Integer id) {
 		
 		return webClient.get()
-				.uri(uriBuilder -> uriBuilder.path("/api/movie/"+id+"/similar").queryParam("api_key", api_key).build()).retrieve()
+				.uri(uriBuilder -> uriBuilder.path("/movie/"+id+"/similar").queryParam("api_key", api_key).build()).retrieve()
 				.bodyToMono(HashMap.class).block();
 		
 	}
